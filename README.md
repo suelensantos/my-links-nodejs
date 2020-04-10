@@ -2,7 +2,7 @@
 
 This project aims to create a list of important websites to never forget. 
 
-By @(Rockeseat)[https://github.com/Rocketseat] class on (youtube)[https://www.youtube.com/watch?v=DiXbJL3iWVs]
+By @[Rockeseat](https://github.com/Rocketseat) class on [youtube](https://www.youtube.com/watch?v=DiXbJL3iWVs)
 
 Initial project: https://github.com/Rocketseat/youtube-masterclass-nodejs 
 
