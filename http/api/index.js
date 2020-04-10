@@ -21,20 +21,32 @@ http.createServer((req, res) => {
     const { name, url, del } = URL.parse(req.url, true).query
 
     res.writeHead(200, {
-        'Access-Control-Allow-Origin': '*'
+        'Content-type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': '*'
     })
 
-    // all resources
-    if(!name || !url)
-        return res.end(JSON.stringify(data))
+    // POST
+    if(req.method === 'POST') {
+        req.on('data', new_data => {
+            data.urls.push(JSON.parse(new_data))
+            return writeFile((message) => res.end(message))
+        })
+    }
 
-    if(del) {
+    // DELETE
+    if(req.method === 'DELETE' || req.method === 'OPTIONS' || del) {               
         data.urls = data.urls.filter(item => String(item.url) !== String(url))
         return writeFile((message) => res.end(message))   
     }
 
-    data.urls.push({name, url})
+    // GET all resources
+    if(req.method === 'GET' || !name || !url) {
+        return res.end(JSON.stringify(data))
+    }
 
-    return writeFile((message) => res.end(message)) 
+    //data.urls.push({name, url})
+
+    //return writeFile((message) => res.end(message))
 
 }).listen(3000, () => console.log('Api is running'))
